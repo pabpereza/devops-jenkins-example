@@ -24,4 +24,6 @@ jobs:
         # Password or personal access token used to log against the Docker registry
         password: ${{ secrets.DOCKERHUB_PASS  }}
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag cyberstriker/actions-lab:$(date +%s) --push
+      run: docker build . --file Dockerfile --tag cyberstriker/actions-lab:$(date +%s)
+    - name: Push the Docker image
+      run: docker push cyberstriker/actions-lab:$(date +%s)
