@@ -36,4 +36,13 @@ jobs:
           # Password or personal access token used to log against the Docker registry
           password: ${{ secrets.DOCKERHUB_PASS }}
 
-
+      
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v2.4.0
+        with:
+          # Path to the Dockerfile
+          file: .
+          # List of metadata for an image
+          labels: cyberstriker/actions-lab
+          # Push is a shorthand for --output=type=registry
+          push: true
