@@ -38,7 +38,6 @@ jobs:
         image-ref: cyberstriker/actions-lab
         exit-code: 1
         severity: HIGH,CRITICAL
-        ignore-unfixed: true # optional, default is false
  
     - name: Push the Docker image
       run: docker push cyberstriker/actions-lab
