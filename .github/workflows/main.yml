@@ -27,18 +27,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASS  }}
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag cyberstriker/actions-lab
-    - name: Aqua Security Trivy
-      # You may pin to the exact commit or the version.
-      # uses: aquasecurity/trivy-action@341f810bd602419f966a081da3f4debedc3e5c8e
-      uses: aquasecurity/trivy-action@0.0.15
-      with:
-        # Scan type to use for scanning vulnerability
-        scan-type: image # optional, default is image
-        # image reference(for backward compatibility)
-        image-ref: cyberstriker/actions-lab
-        exit-code: 1
-        severity: HIGH,CRITICAL
- 
+
     - name: Push the Docker image
       run: docker push cyberstriker/actions-lab
 
