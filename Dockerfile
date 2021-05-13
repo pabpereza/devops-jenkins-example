@@ -1,11 +1,3 @@
-FROM python:3.8
+FROM debian
 
-WORKDIR /workspace
-
-COPY requirements.txt /workspace/requirements.txt
-
-RUN pip install -r requirements.txt
-
-COPY src /workspace/src
-
-ENTRYPOINT ["python","src/main.py"]
+RUN apt update && apt install -y git curl tmux vim stow
