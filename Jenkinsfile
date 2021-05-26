@@ -23,13 +23,16 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+		
             }
         }
         
         stage('Packet'){
             steps {
                 echo 'Dockerizing'
-		docker.build registry
+		dscript {
+			dockerImage = docker.build registry + ":latest"
+		}
             }
         }
         
@@ -37,6 +40,17 @@ pipeline {
             steps{
                 echo 'Analizing with trivy..'
                 sh 'trivy i --severity HIGH,CRITICAL --ignore-unfixed cyberstriker/lab-actions'
+            }
+        }
+	    
+	stage('Push image'){
+            steps {
+                echo 'Dockerizing'
+		script {
+		  docker.withRegistry( '', registryCredential ) {
+		    dockerImage.push()
+		  }
+		}
             }
         }
         
