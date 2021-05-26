@@ -1,4 +1,9 @@
 pipeline {
+
+    environment {
+        registry = "cyberstriker/lab-actions"
+        registryCredential = 'dockerhub'
+    }
     agent any
 
     stages {
@@ -24,7 +29,7 @@ pipeline {
         stage('Packet'){
             steps {
                 echo 'Dockerizing'
-                sh 'docker build . -t cyberstriker/lab-actions'
+		docker.build registry
             }
         }
         
