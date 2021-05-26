@@ -31,7 +31,7 @@ pipeline {
             steps {
                 echo 'Dockerizing'
 		dscript {
-			dockerImage = docker.build registry + ":latest"
+			dockerImage = docker.build registry
 		}
             }
         }
