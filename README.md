@@ -1,4 +1,3 @@
-# Proyecto de automatización con jenkins
+# Jenkins + Docker + Terraform basic example
 
-## Mini script en python
-Este permite lanzar pruebas de conectividad sobre la página de yahoo
+
