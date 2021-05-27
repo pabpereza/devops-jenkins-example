@@ -27,9 +27,7 @@ pipeline {
         stage('Packet'){
             steps {
                 echo 'Dockerizing'
-		dscript {
-			dockerImage = docker.build registry
-		}
+		sh 'docker build . -t cyberstriker/lab-actions'
             }
         }
         
