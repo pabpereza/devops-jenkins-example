@@ -27,7 +27,7 @@ pipeline {
         stage('Packet'){
             steps {
                 echo 'Dockerizing'
-		sh 'docker build . -t cyberstriker/lab-actions'
+		        sh 'docker build . -t cyberstriker/lab-actions'
             }
         }
         
@@ -38,17 +38,20 @@ pipeline {
             }
         }
 	    
-	stage('Push image'){
+    	stage('Push image'){
             steps {
                 echo 'Push image'
-		
+    	        
             }
         }
-        
+            
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                sshagent (credentials: ['ssh-aws-deploy']) {
+                    sh 'ssh -o StrictHostKeyChecking=no -T ubuntu@ec2-35-158-180-209.eu-central-1.compute.amazonaws.com docker rm -f nginx && docker run -d -p 80:80 --name nginx cyberstriker/actions-lab'
+                }
             }
+                                
         }
     }
 }
