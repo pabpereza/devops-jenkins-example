@@ -1,9 +1,6 @@
 pipeline {
 
-    environment {
-        registry = "cyberstriker/lab-actions"
-        registryCredential = 'dockerhub'
-    }
+  
     agent any
 
     stages {
@@ -45,12 +42,8 @@ pipeline {
 	    
 	stage('Push image'){
             steps {
-                echo 'Dockerizing'
-		script {
-		  docker.withRegistry( '', registryCredential ) {
-		    dockerImage.push()
-		  }
-		}
+                echo 'Push image'
+		
             }
         }
         
