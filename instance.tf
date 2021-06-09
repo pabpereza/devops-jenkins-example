@@ -8,21 +8,6 @@ resource "aws_instance" "lab" {
 
 	vpc_security_group_ids =  [aws_security_group.instance.id]
 
-	provisioner "remote-exec" {
-		inline = [
-			"sudo apt update",
-			"curl https://get.docker.com | sh",
-			"sudo usermod -aG docker ubuntu"
-		]
-	}
-
-	connection {
-		type = "ssh"
-		agent = true
-		host = aws_instance.lab.public_ip
-		user = "ubuntu"
-		private_key = "${file("~/Downloads/lab-key.pem")}"
-	}
 }
 
 
